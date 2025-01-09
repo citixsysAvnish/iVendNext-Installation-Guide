@@ -9,16 +9,16 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
     Wnidows 11 
     VS Code
 
-### STEP 1 Check Docker version
+### STEP 1: Check Docker version
     docker version
     git version
 
-### STEP 2  Clone frappe_docker and move to frappe_docker folder
+### STEP 2:  Clone frappe_docker and move to frappe_docker folder
 
     git clone https://github.com/frappe/frappe_docker.git
     cd frappe_docker
 
-### STEP 3
+### STEP 3:
 
    Copy example devcontainer config from 
     
@@ -28,11 +28,11 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
     
     development/vscode-example folder to development/.vscode folder
    
-### STEP 4 Install VSCode Remote Containers extension
+### STEP 4: Install VSCode Remote Containers extension
     
     Open vscode and install 'Dev Containers' extension
     
-###  STEP 5 After the extensions are installed, you can
+###  STEP 5: After the extensions are installed, you can
 
   Open frappe_docker folder in VS Code.
   
@@ -46,23 +46,23 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
     netsh http add iplisten ipaddress=::
                 
    The development directory is ignored by git. It is mounted and available inside the container. Create all your benches (installations of bench, the tool that          manages frappe) inside this directory.
-   Node v14 and v10 are installed. Check with nvm ls. Node v14 is used by default.
+   Node v15 and v10 are installed. Check with nvm ls. Node v14 is used by default.
                 
     
-### STEP 6 Initilase frappe bench with frappe version 14 and Switch directory
+### STEP 6: Initilase frappe bench with frappe version 14 and Switch directory
     
     bench init --skip-redis-config-generation --frappe-branch version-15 ivend-bench
     cd ivend-bench
 
-### STEP 7 Delete frappe folder from the ivend-bench app 
+### STEP 7: Delete frappe folder from the ivend-bench app 
  
     Delete \development\ivend-bench\apps\frappe
     
-### STEP 8 Install iVendFramework
+### STEP 8: Install iVendFramework
 
     bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendFramework.git
 
-### STEP 9 Setup hosts
+### STEP 9: Setup hosts
     
    We need to tell bench to use the right containers instead of localhost. Run the following commands inside the container:
 
@@ -70,6 +70,7 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
     bench set-config -g redis_cache redis://redis-cache:6379
     bench set-config -g redis_queue redis://redis-queue:6379
     bench set-config -g redis_socketio redis://redis-socketio:6379
+    
   For any reason the above commands fail, set the values in common_site_config.json manually.
 
     {
@@ -79,34 +80,50 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 	 "redis_socketio": "redis://redis-socketio:6379"
     }
     
-### STEP 10 Install iVendNext
+### STEP 10: Install App
+ iVendNext
     
     bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendNext.git
 
-### STEP 11 Install iVend-POS
+ iVend-POS
     
     bench get-app --branch develop --resolve-deps https://github.com/ivendnext/iVend-POS.git
+ Payments
 
-### STEP 12 Create a new site
+    bench get-app --branch version-15 --resolve-deps payments
+ HRMS    
+    
+    bench get-app hrms
+
+### STEP 11: Create a new site
    sitename MUST end with .localhost for trying deployments locally.
    MariaDB root password: 123
     
     bench new-site cdivendnext.localhost --no-mariadb-socket  
 
-### STEP 13 Set bench developer mode on the new site
+### STEP 12: Set bench developer mode on the new site
     
     bench --site cdivendnext.localhost set-config developer_mode 1
     bench --site cdivendnext.localhost clear-cache 
            
-### STEP 14 Install iVendNext app in site
+### STEP 13: Install app in site
+  iVendNext
 
     bench --site cdivendnext.localhost install-app erpnext
     
-### STEP 15 Install iVendNext app in site
+  iVend POS
 
     bench --site cdivendnext.localhost install-app ivendnext_pos   
+
+  Payments
+
+    bench --site cdivendnext.localhost install-app payments
     
-### STEP 16 Start Frappe bench 
+  HRMS 
+
+    bench --site cdivendnext.localhost install-app hrms
+
+### STEP 14: Start Frappe bench 
     
     bench start
     
