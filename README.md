@@ -62,10 +62,9 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 
     bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendFramework.git
     
-if getting error in git clone then try with git user name and git token 
+if getting error in git clone then try with git user name and git public access token 
 
-    bench get-app --branch develop --resolve-deps https://<git user>:<git token>@github.com/ivendnext/iVendFramework.git
-
+    bench get-app --branch Release-1.0 --resolve-deps https://<git user>:<git public access token>@github.com/ivendnext/iVendFramework.git
 
 ### STEP 9: Setup hosts
     
@@ -99,6 +98,8 @@ if getting error in git clone then try with git user name and git token
  HRMS    
     
     bench get-app hrms
+    
+for the git clone error refer the setep 8 and install app with git user name and git public access tokne
 
 ### STEP 11: Create a new site
    sitename MUST end with .localhost for trying deployments locally.
