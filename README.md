@@ -50,7 +50,6 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
                 
     
 ### STEP 6 Initilase frappe bench with frappe version 14 and Switch directory
-
     
     bench init --skip-redis-config-generation --frappe-branch version-15 ivend-bench
     cd ivend-bench
@@ -80,37 +79,37 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 	 "redis_socketio": "redis://redis-socketio:6379"
     }
     
-### STEP 10 Create a new site
+### STEP 10 Install iVendNext
+    
+    bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendNext.git
+
+### STEP 11 Install iVend-POS
+    
+    bench get-app --branch develop --resolve-deps https://github.com/ivendnext/iVend-POS.git
+
+### STEP 12 Create a new site
    sitename MUST end with .localhost for trying deployments locally.
    MariaDB root password: 123
     
-    bench new-site cdivendnext.com --no-mariadb-socket  
+    bench new-site cdivendnext.localhost --no-mariadb-socket  
 
-### STEP 11 Set bench developer mode on the new site
+### STEP 13 Set bench developer mode on the new site
     
-    bench --site cdivendnext.com set-config developer_mode 1
-    bench --site cdivendnext.com clear-cache 
-       
-### STEP 12 Install iVendNext
-    
-    bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendNext.git
-    
-### STEP 13 Install iVendNext app in site
+    bench --site cdivendnext.localhost set-config developer_mode 1
+    bench --site cdivendnext.localhost clear-cache 
+           
+### STEP 14 Install iVendNext app in site
 
-    bench --site cdivendnext.com install-app erpnext
+    bench --site cdivendnext.localhost install-app erpnext
     
-### STEP 14 Install iVend-POS
-    
-    bench get-app --branch develop --resolve-deps https://github.com/ivendnext/iVend-POS.git
-    
-### STEP 13 Install iVendNext app in site
+### STEP 15 Install iVendNext app in site
 
-    bench --site cdivendnext.com install-app ivendnext_pos   
+    bench --site cdivendnext.localhost install-app ivendnext_pos   
     
-### STEP 14 Start Frappe bench 
+### STEP 16 Start Frappe bench 
     
     bench start
     
-You can now login with user Administrator and the password you choose when creating the site. Your website will now be accessible at location cdivendnext.com:8000
+You can now login with user Administrator and the password you choose when creating the site. Your website will now be accessible at location cdivendnext.localhost:8000
     
    
