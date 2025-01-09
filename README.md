@@ -99,7 +99,7 @@ if getting error in git clone then try with git user name and git public access 
     
     bench get-app hrms
     
-for the git clone error refer the setep 8 and install app with git user name and git public access tokne
+for the git clone error refer the setep 8 and install app with git user name and git public access token
 
 ### STEP 11: Create a new site
    sitename MUST end with .localhost for trying deployments locally.
