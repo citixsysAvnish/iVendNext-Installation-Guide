@@ -61,6 +61,11 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 ### STEP 8: Install iVendFramework
 
     bench get-app --branch Release-1.0 --resolve-deps https://github.com/ivendnext/iVendFramework.git
+    
+if getting error in git clone then try with git user name and git token 
+
+    bench get-app --branch develop --resolve-deps https://<git user>:<git token>@github.com/ivendnext/iVendFramework.git
+
 
 ### STEP 9: Setup hosts
     
