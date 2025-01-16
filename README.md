@@ -36,7 +36,7 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 
   Open frappe_docker folder in VS Code.
   
-  Launch the command, from Command Palette (Ctrl + Shift + P) Remote-Containers: Reopen in Container. You can also click in the bottom left corner to access the remote   container menu.
+  Launch the command, from Command Palette (Ctrl + Shift + P) Remote-Containers: Reopen in Container. You can also click in the bottom left corner to access the remote container menu.
   
 ### Note: 
    if this error in running contaners try the below commnad in CMD
@@ -45,11 +45,11 @@ A complete Guide to Install Frappe Bench in Windows 11 Using Docker and install 
 	
     netsh http add iplisten ipaddress=::
                 
-   The development directory is ignored by git. It is mounted and available inside the container. Create all your benches (installations of bench, the tool that          manages frappe) inside this directory.
+   The development directory is ignored by git. It is mounted and available inside the container. Create all your benches (installations of bench, the tool that manages frappe) inside this directory.
    Node v15 and v10 are installed. Check with nvm ls. Node v14 is used by default.
                 
     
-### STEP 6: Initilase frappe bench with frappe version 14 and Switch directory
+### STEP 6: Initilase frappe bench with frappe version 15 and Switch directory
     
     bench init --skip-redis-config-generation --frappe-branch version-15 ivend-bench
     cd ivend-bench
@@ -82,6 +82,21 @@ if getting error in git clone then try with git user name and git public access 
 	 "redis_cache": "redis://redis-cache:6379",
 	 "redis_queue": "redis://redis-queue:6379",
 	 "redis_socketio": "redis://redis-socketio:6379"
+    }
+
+ For the Ubantu
+      
+    bench set-config -g redis_cache redis://127.0.0.1:6379
+    bench set-config -g redis_queue redis://127.0.0.1:6379
+    bench set-config -g redis_socketio redis://127.0.0.1:6379 
+    
+  For any reason the above commands fail, set the values in common_site_config.json manually.
+
+    {
+	 "db_host": "mariadb",
+	 "redis_cache": "redis://127.0.0.1:6379",
+	 "redis_queue": "redis://127.0.0.1:6379",
+	 "redis_socketio": "redis://127.0.0.1:6379"
     }
     
 ### STEP 10: Install App
@@ -133,6 +148,4 @@ for the git clone error refer the setep 8 and install app with git user name and
     
     bench start
     
-You can now login with user Administrator and the password you choose when creating the site. Your website will now be accessible at location cdivendnext.localhost:8000
-    
-   
+You can now login with user Administrator and the password you choose when creating the site. Your website will now be accessible at location cdivendnext.localhost:8000 
