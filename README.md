@@ -92,8 +92,7 @@ if getting error in git clone then try with git user name and git public access 
     
   For any reason the above commands fail, set the values in common_site_config.json manually.
 
-    {
-	 "db_host": "mariadb",
+    {	
 	 "redis_cache": "redis://127.0.0.1:6379",
 	 "redis_queue": "redis://127.0.0.1:6379",
 	 "redis_socketio": "redis://127.0.0.1:6379"
